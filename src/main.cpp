@@ -1,4 +1,5 @@
 #include <iostream>
+#include "framebuffer.h"
 
 int main(){
     int width = 800;
@@ -6,15 +7,15 @@ int main(){
 
     // usign \n instead of std::endl because endl flushes buffer every call making it slower
 
-    std::cout << "P3\n";
-    std::cout << width << " " << height << "\n";
-    std::cout << "255\n";
+    Framebuffer f(800, 600);
 
-    for(int i=0; i<width; i++){
-        for(int j=0; j<height; j++){
-            std::cout << "255 100 0\n";
+    for(int i=0; i<800; i++){
+        for(int j=0; j<600; j++){
+            f.setPixel(i, j , (1 - (float)i/800)*255, ((float)i/800)*255, 0);
         }
     }
+
+    f.writePPM("image2.ppm");
 
     return 0;
 }
