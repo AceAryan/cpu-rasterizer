@@ -1,3 +1,6 @@
+#ifndef FRAMEBUFFER_H
+#define FRAMEBUFFER_H
+
 #include <vector>
 #include <fstream>
 
@@ -28,3 +31,5 @@ class Framebuffer{
             } 
         }
 };
+
+#endif

@@ -1,5 +1,6 @@
 #include <iostream>
 #include "framebuffer.h"
+#include "draw.h"
 
 int main(){
     int width = 800;
@@ -15,7 +16,9 @@ int main(){
         }
     }
 
-    f.writePPM("image2.ppm");
+    drawLine(f, 40, 40, 400, 400, 0, 0, 255);
 
+    f.writePPM("image3.ppm");
+    
     return 0;
 }
