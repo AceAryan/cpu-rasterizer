@@ -24,8 +24,8 @@ class Framebuffer{
             file << width << " " << height << "\n";
             file << "255\n";
             
-            for(int x=0; x<width; x++){
-                for(int y=0; y<height; y++){
+            for(int y=0; y<height; y++){
+                for(int x=0; x<width; x++){
                     file << array[(y*width + x)*3] << " " << array[(y*width + x)*3 + 1] << " " << array[(y*width + x)*3 + 2] << "\n";
                 }
             } 
