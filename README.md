@@ -5,7 +5,8 @@ Renders output as PPM image files.
 
 ## What it does
 - Framebuffer: pixel buffer in memory with PPM export
-- Line drawing: Bresenham's line algorithm
+- Line drawing: Bresenham's line algorithm (all 8 octants)
+- Triangle outline: 3-point wireframe via drawTriangle
 
 ## Building
 ```bash
@@ -14,10 +15,10 @@ g++ main.cpp -o rasterizer
 ```
 
 ## Roadmap
-- [ ] Fix line drawing for all slopes (octant handling)
-- [ ] Triangle rasterization
+- [x] Fix line drawing for all slopes (octant handling)
+- [x] Triangle outline
+- [ ] Filled triangle (barycentric coordinates)
 - [ ] Z-buffer / depth testing
-- [ ] Texture mapping
 - [ ] OBJ file loading
 - [ ] Lighting (Phong)
 - [ ] SIMD optimization
