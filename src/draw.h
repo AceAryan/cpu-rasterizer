@@ -42,3 +42,30 @@ void drawTriangle(Framebuffer &f, int x0, int y0, int x1, int y1, int x2, int y2
     drawLine(f, x1, y1, x2, y2, r, g, b);
     drawLine(f, x2, y2, x0, y0, r, g, b);
 }
+
+void drawFilledTriangle(Framebuffer &f, int x0, int y0, int x1, int y1, int x2, int y2, int r, int g, int b){
+    drawLine(f, x0, y0, x1, y1, r, g, b);
+    drawLine(f, x1, y1, x2, y2, r, g, b);
+    drawLine(f, x2, y2, x0, y0, r, g, b);
+
+    // using Barycentric coordinates
+
+    int xmin = std::min({x0,x1,x2});
+    int xmax = std::max({x0,x1,x2});
+
+    int ymin = std::min({y0,y1,y2});
+    int ymax = std::max({y0,y1,y2});
+
+    double denom = (y1 - y2) * (x0 - x2) + (x2 - x1) * (y0 - y2);
+    if(denom == 0.0) return; // Degenerate triangle
+
+    for(int i=xmin; i<=xmax; ++i){
+        for(int j=ymin; j<=ymax; ++j){
+            double a = ((y1-y2)*(i-x2)) + ((x2-x1)*(j-y2)) / denom;
+            double b = ((y2-y0)*(i-x2)) + ((x0-x2)*(j-y2)) / denom;
+            double c = 1.0 - a - b;
+
+            if((a > 0.0) && (b > 0.0) && (c > 0.0)) f.setPixel(i,j,r,g,b);
+        }
+    }
+}

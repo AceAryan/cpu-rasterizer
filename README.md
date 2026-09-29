@@ -17,7 +17,7 @@ g++ main.cpp -o rasterizer
 ## Roadmap
 - [x] Fix line drawing for all slopes (octant handling)
 - [x] Triangle outline
-- [ ] Filled triangle (barycentric coordinates)
+- [x] Filled triangle (barycentric coordinates)
 - [ ] Z-buffer / depth testing
 - [ ] OBJ file loading
 - [ ] Lighting (Phong)
