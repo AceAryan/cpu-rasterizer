@@ -3,19 +3,25 @@
 
 #include <vector>
 #include <fstream>
+#include <cfloat>
 
 class Framebuffer{
 
     int width, height;
     std::vector<int> array;
+    std::vector<float> zbuffer;
 
     public:
-        Framebuffer(int w, int h): width(w), height(h), array(w*h*3) {};
+        Framebuffer(int w, int h): width(w), height(h), array(w*h*3), zbuffer(w*h, FLT_MAX) {};
 
-        void setPixel(int x, int y, int r, int g, int b){
-            array[(y*width + x)*3] = r;
-            array[(y*width + x)*3 + 1] = g;
-            array[(y*width + x)*3 + 2] = b;
+        void setPixel(int x, int y, float z, int r, int g, int b){
+            if(z < zbuffer[y*width + x]){
+                array[(y*width + x)*3] = r;
+                array[(y*width + x)*3 + 1] = g;
+                array[(y*width + x)*3 + 2] = b;
+
+                zbuffer[y*width + x] = z;
+            }
         }
 
         void writePPM(std::string filename){
