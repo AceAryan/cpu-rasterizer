@@ -36,6 +36,16 @@ class Framebuffer{
                 }
             } 
         }
+
+        void clearBackground(int r, int g, int b){
+            for(int y=0; y<height; y++){
+                for(int x=0; x<width; x++){
+                    array[(y*width + x)*3] = r;
+                    array[(y*width + x)*3 + 1] = g;
+                    array[(y*width + x)*3 + 2] = b;
+                }
+            }
+        }
 };
 
 #endif
