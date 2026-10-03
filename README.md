@@ -18,7 +18,7 @@ g++ main.cpp -o rasterizer
 - [x] Fix line drawing for all slopes (octant handling)
 - [x] Triangle outline
 - [x] Filled triangle (barycentric coordinates)
-- [ ] Z-buffer / depth testing
+- [x] Z-buffer / depth testing
 - [ ] OBJ file loading
 - [ ] Lighting (Phong)
 - [ ] SIMD optimization
