@@ -19,6 +19,6 @@ g++ main.cpp -o rasterizer
 - [x] Triangle outline
 - [x] Filled triangle (barycentric coordinates)
 - [x] Z-buffer / depth testing
-- [ ] OBJ file loading
+- [x] OBJ file loading
 - [ ] Lighting (Phong)
 - [ ] SIMD optimization
