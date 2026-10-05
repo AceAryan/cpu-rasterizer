@@ -1,5 +1,4 @@
-#ifndef FRAMEBUFFER_H
-#define FRAMEBUFFER_H
+#pragma once
 
 #include <vector>
 #include <fstream>
@@ -15,6 +14,7 @@ class Framebuffer{
         Framebuffer(int w, int h): width(w), height(h), array(w*h*3), zbuffer(w*h, FLT_MAX) {};
 
         void setPixel(int x, int y, float z, int r, int g, int b){
+            if(x < 0 || x >= width || y < 0 || y >= height) return;
             if(z < zbuffer[y*width + x]){
                 array[(y*width + x)*3] = r;
                 array[(y*width + x)*3 + 1] = g;
@@ -47,5 +47,3 @@ class Framebuffer{
             }
         }
 };
-
-#endif
