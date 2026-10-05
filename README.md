@@ -20,5 +20,7 @@ g++ main.cpp -o rasterizer
 - [x] Filled triangle (barycentric coordinates)
 - [x] Z-buffer / depth testing
 - [x] OBJ file loading
-- [ ] Lighting (Phong)
+- [x] Flat shading (diffuse lighting)
+- [ ] Gouraud shading (interpolated diffuse)
+- [ ] Phong lighting (ambient + diffuse + specular)
 - [ ] SIMD optimization
