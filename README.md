@@ -22,5 +22,5 @@ g++ main.cpp -o rasterizer
 - [x] OBJ file loading
 - [x] Flat shading (diffuse lighting)
 - [x] Gouraud shading (interpolated diffuse)
-- [ ] Phong lighting (ambient + diffuse + specular)
+- [x] Phong lighting (ambient + diffuse + specular)
 - [ ] SIMD optimization

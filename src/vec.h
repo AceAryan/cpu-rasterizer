@@ -20,6 +20,19 @@ struct Vec3{
         float denom = sqrt(x*x + y*y + z*z);
         return {x/denom, y/denom, z/denom};
     }
+
+    Vec3 operator*(float scalar){
+        return {x*scalar, y*scalar, z*scalar};
+    }
+
+    Vec3 operator+(Vec3 other){
+        return {x+other.x, y+other.y, z+other.z};
+    }
+
+    Vec3 reflect(Vec3 light){
+        float d = dot(light);
+        return light - (*this * (2.0f*d));
+    }
 };
 
 struct Mat3{

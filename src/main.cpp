@@ -3,6 +3,7 @@
 #include "draw.h"
 #include "model.h"
 #include "vec.h"
+#include <cmath>
 
 int main(){
     int width = 800;
@@ -28,6 +29,11 @@ int main(){
     // int count = 0;
     Mat3 rot = {-1,0,0, 0,1,0, 0,0,-1}; // matrix rotation
 
+    // phong lighting
+    Vec3 view = {0, 0, 1};
+    float ambient = 0.1f;
+    int shininess = 32;      
+
     for(auto& it : model.faces){
         Vec3 a = rot.multiply({model.vertices[it.v1].x, model.vertices[it.v1].y, model.vertices[it.v1].z});
         Vec3 b = rot.multiply({model.vertices[it.v2].x, model.vertices[it.v2].y, model.vertices[it.v2].z});
@@ -50,6 +56,18 @@ int main(){
         float b2 = nb.dot(light);
         float b3 = nc.dot(light);
 
+        Vec3 reflectA = na.reflect(light);
+        float specA = pow(std::max(0.0f, reflectA.dot(view)), shininess);
+        float finalB1 = ambient + b1 + specA;
+
+        Vec3 reflectB = nb.reflect(light);
+        float specB = pow(std::max(0.0f, reflectB.dot(view)), shininess);
+        float finalB2 = ambient + b2 + specB;
+
+        Vec3 reflectC = nc.reflect(light);
+        float specC = pow(std::max(0.0f, reflectC.dot(view)), shininess);
+        float finalB3 = ambient + b3 + specC;   
+
         // implementing viewport transform
     
         int ax = (a.x + 1) * width/2;
@@ -65,7 +83,7 @@ int main(){
         drawFilledTriangle(f, ax, ay, a.z, bx, by, b.z, cx, cy, c.z, b1, b2, b3);
     }
 
-    f.writePPM("../images/image12.ppm");
+    f.writePPM("../images/image13.ppm");
     
     return 0;
 }
