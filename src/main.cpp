@@ -25,6 +25,8 @@ int main(){
     // drawLine(f, 100, 500, 100, 100, 255, 255, 255); 
     
     Model model = objLoader("../assets/african_head.obj");
+    // int count = 0;
+
     for(auto& it : model.faces){
         Vec3 a = {model.vertices[it.v1].x, model.vertices[it.v1].y, model.vertices[it.v1].z};
         Vec3 b = {model.vertices[it.v2].x, model.vertices[it.v2].y, model.vertices[it.v2].z};
@@ -34,8 +36,18 @@ int main(){
         Vec3 edge2 = c - a;
         Vec3 normal = edge1.cross(edge2).normalize();
         
-        Vec3 light = {0, 0, 1};
-        float brightness = normal.dot(light);
+        Vec3 light = {0, 0, -1};
+
+        // float brightness = normal.dot(light);
+        // int col = brightness*255;
+
+        Vec3 na = model.normals[it.n1];
+        Vec3 nb = model.normals[it.n2];
+        Vec3 nc = model.normals[it.n3];
+
+        float b1 = na.dot(light);
+        float b2 = nb.dot(light);
+        float b3 = nc.dot(light);
 
         // implementing viewport transform
     
@@ -46,13 +58,13 @@ int main(){
         int cx = (c.x + 1) * width/2;
         int cy = (1 - c.y) * height/2;
 
-        if(brightness>0){
-            int col = brightness*255;
-            drawFilledTriangle(f, ax, ay, a.z, bx, by, b.z, cx, cy, c.z, col, col, col);
-        }
+        // std::cout << b1 << " " << b2 << " " << b3 << "\n";
+        // if(++count >= 10) break;  // just print first face
+        
+        drawFilledTriangle(f, ax, ay, a.z, bx, by, b.z, cx, cy, c.z, b1, b2, b3);
     }
 
-    f.writePPM("../images/image10.ppm");
+    f.writePPM("../images/image11.ppm");
     
     return 0;
 }

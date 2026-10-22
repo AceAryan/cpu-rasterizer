@@ -49,7 +49,7 @@ void drawTriangle(Framebuffer &f, int x0, int y0, int z0, int x1, int y1, int z1
     drawLine(f, x2, y2, z2, x0, y0, z0, r, g, b);
 }
 
-void drawFilledTriangle(Framebuffer &f, int x0, int y0, float z0, int x1, int y1, float z1, int x2, int y2, float z2, int r, int g, int b){
+void drawFilledTriangle(Framebuffer &f, int x0, int y0, float z0, int x1, int y1, float z1, int x2, int y2, float z2, float b1, float b2, float b3){
     // drawLine(f, x0, y0, x1, y1, r, g, b);
     // drawLine(f, x1, y1, x2, y2, r, g, b);
     // drawLine(f, x2, y2, x0, y0, r, g, b);
@@ -73,7 +73,11 @@ void drawFilledTriangle(Framebuffer &f, int x0, int y0, float z0, int x1, int y1
 
             float z = a*z0 + b*z1 + c*z2;
 
-            if((a > 0.0) && (b > 0.0) && (c > 0.0)) f.setPixel(i,j,z,r,g,b);
+            float brightness = a*b1 + b*b2 + c*b3;
+            if(brightness < 0) brightness = 0;
+            int col = brightness * 255;
+
+            if((a > 0.0) && (b > 0.0) && (c > 0.0)) f.setPixel(i,j,z,col,col,col);
         }
     }
 }
